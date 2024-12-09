@@ -14,4 +14,4 @@ const cpuInfo = os.cpus();
   } catch (error) {
     console.log(error);
   }
-})();
+})();  
