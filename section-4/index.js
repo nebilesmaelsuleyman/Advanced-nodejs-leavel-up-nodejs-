@@ -16,6 +16,7 @@ mongoose
 
 app.use(express.json());
 app.use(blogRouter);
+app.use(errorConverter)
 app.use(errorHandler)
 app.listen(3000, () => {
 console.log('server listening on port 3000');

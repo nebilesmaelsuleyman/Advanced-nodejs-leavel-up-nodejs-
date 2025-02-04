@@ -18,6 +18,7 @@
   "homepage": "https://github.com/nebilesmaelsuleyman/Advanced-nodejs-leavel-up-nodejs-#readme",
   "dependencies": {
     "dotenv": "^16.4.7",
+    "http-status": "^2.1.0",
     "mongoose": "^8.9.6"
   }
 }
