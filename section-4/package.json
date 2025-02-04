@@ -1,0 +1,23 @@
+{
+  "name": "section-4",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nebilesmaelsuleyman/Advanced-nodejs-leavel-up-nodejs-.git"
+  },
+  "author": "nebil",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nebilesmaelsuleyman/Advanced-nodejs-leavel-up-nodejs-/issues"
+  },
+  "homepage": "https://github.com/nebilesmaelsuleyman/Advanced-nodejs-leavel-up-nodejs-#readme",
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "mongoose": "^8.9.6"
+  }
+}

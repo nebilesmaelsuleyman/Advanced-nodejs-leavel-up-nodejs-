@@ -1,10 +1,12 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
-const blogRouter = require('./routes/blog.route');
+const { errorHandler, errorConverter } = require('./midlwares/errors');
+const blogRouter = require('./routes/blogroutes');
+const config = require('./config/config');
 
 mongoose
-.connect('mongodb://127.0.0.1:27017/blog_app')
+.connect(config.dbConnection)
 .then(() => {
     console.log('connected to mongodb');
 })
@@ -14,6 +16,7 @@ mongoose
 
 app.use(express.json());
 app.use(blogRouter);
+app.use(errorHandler)
 app.listen(3000, () => {
 console.log('server listening on port 3000');
 });
