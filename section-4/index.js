@@ -2,6 +2,8 @@
 const mongoose = require('mongoose');
 const config = require('./config/config');
 const app= require('./server');
+const http=require('http')
+const logger=require('./config/logger')
 
 mongoose
 .connect(config.dbConnection)
@@ -15,7 +17,7 @@ mongoose
 
 const httpServer=http.createServer(app);
 const server=httpServer.listen(config.port,()=>{
-    console.log(`server listening on port ${config.port}`)
+    logger.info(`server listening on port ${config.port}`)
 });
 
 
@@ -39,6 +41,8 @@ const unExcpectedErrorHandler =(error)=>{
 
 process.on('uncaughtException',unExcpectedErrorHandler)
 process.on('unhandleRejection',unExcpectedErrorHandler)
+
+// SIGTERM: A signal requesting graceful process termination, allowing cleanup before exit.
 process.on('SIGTERM',()=>{
     console.log('SIGTERM RECIEVED');
     if(server){
