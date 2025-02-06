@@ -10,7 +10,7 @@ try {
 
 const getBlogs = async (req, res) => {
 try {
-    const blogs = await Blogg.find({});
+    const blogs = await Blog.find({});
     res.json(blogs);
 } catch (error) {
     res.end({ error: true, message: error.message });

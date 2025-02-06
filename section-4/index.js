@@ -8,10 +8,10 @@ const logger=require('./config/logger')
 mongoose
 .connect(config.dbConnection)
 .then(() => {
-    console.log('connected to mongodb');
+    logger.info('connected to mongodb');
 })
 .catch((err) => {
-    console.error(err);
+    logger.error(err);
 });
 
 
@@ -25,7 +25,7 @@ const server=httpServer.listen(config.port,()=>{
 const exitHandler=()=>{
     if(server){
         server.close(()=>{
-            console.log('server closed')
+            logger.info('server closed')
             process.exit(1)
         })
     }else{
@@ -33,7 +33,7 @@ const exitHandler=()=>{
     }
 }
 const unExcpectedErrorHandler =(error)=>{
-    console.log(error)
+   logger.error(error)
     exitHandler();
 }  
 
@@ -44,7 +44,7 @@ process.on('unhandleRejection',unExcpectedErrorHandler)
 
 // SIGTERM: A signal requesting graceful process termination, allowing cleanup before exit.
 process.on('SIGTERM',()=>{
-    console.log('SIGTERM RECIEVED');
+    logger.info('SIGTERM RECIEVED');
     if(server){
         server.close();
     }

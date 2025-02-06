@@ -1,5 +1,5 @@
 const ApiError = require("../utils/ApiError");
-
+const logger=require('./../config/logger')
 const errorConverter=(err,req,res,next)=>{
     let error=err;
     if(!(error instanceof ApiError)){
@@ -20,7 +20,7 @@ const errorHandler =(err,req,res,next)=>{
 
     res.locals.errorMessage= message;
     if(config.env=== 'development'){
-        console.log(err);
+        logger.error(err);
     }
     res.status(statusCode).send(response);
 };

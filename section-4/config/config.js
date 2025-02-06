@@ -1,9 +1,9 @@
 require('dotenv').config();
 const envVarSchema = require('./../validation/env.validation');
 const { value: envVars, error } = envVarSchema.validate(process.env);
-
+const logger =require('./logger')
 if (error) {
-  console.log(error);
+  logger.error(error);
 }
 
 module.exports = {
