@@ -7,5 +7,6 @@
     "workbench.editor.limit.enabled": true,
     "workbench.editor.autoLockGroups": {
         "workbench.editorinputs.searchEditorInput": true
-    }
+    },
+    "git.ignoreLimitWarning": true
 }
