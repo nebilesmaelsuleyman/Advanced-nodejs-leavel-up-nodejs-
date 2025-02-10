@@ -1,2 +1,2 @@
-module.exports.blogservice =require('./blog.services')
-module.exports.userservice=require('./userservices')
+module.exports.blogservice =require('./blog.service')
+module.exports.userservice=require('./user.service')

@@ -1,9 +1,10 @@
 const express =require('express')
-const Router =express.Router();
+const router =express.Router();
 const validate= require('./../midlwares/validate')
-const {createUserSchema}=require('./../validation')
+// const {createUserSchema}=require('./../validation')
+const {uservalidation}= require('./../validation')
 const {authController}=require('./../controller')
 
-Router.post('auth/register',validate(createUserSchema),authController.register)
+router.post('/auth/register',validate(uservalidation.createUserSchema),authController.register)
 
-module.exports=Router
+module.exports=router

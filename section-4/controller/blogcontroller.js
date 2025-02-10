@@ -1,27 +1,33 @@
-const Blog = require('./../model/blogmodel');
-const blogServices= require('./../services')
+// const Blog = require('./../model/blogmodel');
+const {blogService}= require('./../services')
 const httpStatus= require('http-status')
 const catchAsync= require('./../utils/catchAsync')
-const createBlog =catchAsync( async (req, res) => {
+const {blogservice}= require('./../services')
+// const {createBlog , getBlogs}=require('./../services/blog.services')
+const Blog= require('./../model/blogmodel');
 
-    await blogServices.createBlog(req.body);
+const createBlog =catchAsync( async (req, res,next) => {
+
+    const Blogs= await blogservice.createBlog(req.body)
     res
-    .status(httpStatus.Created)
-    .send({ success: true, message: 'Blog created successfyly' });
-    next()
+    .status(201)
+    .json({ success: true, message: 'Blog created successfyly',data:Blogs });
 
 });
 const helllow=catchAsync((req,res,next)=>{
     res.send('hellow margaret')
     console.log('hellow')
-    next()
+
 })
 const getBlogs =catchAsync( async (req, res) => {
 
-    const blogs = await blogServices.getBlogs();
+    const blogs = await blogservice.getBlogs();
     res
-    .status(httpStatus.Ok) .json(blogs);
-    next()
+    .status(200) .json({
+        status:'success',
+        data:blogs
+    });
+
 });
 
 module.exports = {
