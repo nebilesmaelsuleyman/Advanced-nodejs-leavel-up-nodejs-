@@ -1,5 +1,5 @@
 const mongoose =require('mongoose')
-
+const validation =require('validation')
 const {tokenTypes}= require('../config/tokens');
 
 const tokenSchema = mongoose.Schema(

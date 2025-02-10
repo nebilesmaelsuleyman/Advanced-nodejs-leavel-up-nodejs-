@@ -1,8 +1,7 @@
-const {Blog} = require('./../model');
 
+const {Blog} = require('./../model');
 const createBlog = async (body) => {
     await Blog.create(body);
-
 };
 
 const getBlogs = async () => {
