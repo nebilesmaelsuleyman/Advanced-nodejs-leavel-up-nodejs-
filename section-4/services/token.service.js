@@ -1,10 +1,11 @@
-const jwt =require('jwt')
+const jwt =require('jsonwebtoken')
 const dayjs= require('dayjs');
 
 const config =require('./../config/config');
 const {tokenTypes}=require('./../config/tokens')
 
 const generateAuthToken =(userId)=>{
+    
     const payload ={
         sub:userId,
         iat:dayjs().unix(),

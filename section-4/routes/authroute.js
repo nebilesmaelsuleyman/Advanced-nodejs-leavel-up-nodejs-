@@ -6,5 +6,6 @@ const {uservalidation}= require('./../validation')
 const {authController}=require('./../controller')
 
 router.post('/auth/register',validate(uservalidation.createUserSchema),authController.register)
+router.get('/auth/login',authController.login)
 
 module.exports=router

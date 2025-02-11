@@ -18,6 +18,8 @@
   },
   "homepage": "https://github.com/nebilesmaelsuleyman/Advanced-nodejs-leavel-up-nodejs-#readme",
   "dependencies": {
+    "bcrypt": "^5.1.1",
+    "bcryptjs": "^2.4.3",
     "dayjs": "^1.11.13",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
