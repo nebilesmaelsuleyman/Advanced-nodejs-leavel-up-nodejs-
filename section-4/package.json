@@ -18,10 +18,12 @@
   },
   "homepage": "https://github.com/nebilesmaelsuleyman/Advanced-nodejs-leavel-up-nodejs-#readme",
   "dependencies": {
+    "dayjs": "^1.11.13",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "http-status": "^2.1.0",
     "joi": "^17.13.3",
+    "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.9.6",
     "morgan": "^1.10.0",
     "validation": "^0.0.1",
