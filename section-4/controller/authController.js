@@ -19,12 +19,20 @@ const login = catchAsync(async (req, res) => {
     const { email, password } = req.body;
     const user = await authService.login(email, password);
     // generate token
-    const token = await tokenService.generateAuthToken(user._id);
+    const token = await tokenService.generateAuthTokens(user._id);
     res.status(200).send({ user, token });
-  });
+});
+
+const refreshToken = catchAsync(async (req,res)=>{
+    console.log("refresh token from controller",req.body.refreshToken)
+    const tokens = await authService.refreshAuthToken(req.body.refreshToken);
+    console.log("refresh token from controller",tokens)
+    res.status(200).send(...tokens)
+})
 
 
 module.exports ={
     register,
-    login
+    login,
+    refreshToken
 }
