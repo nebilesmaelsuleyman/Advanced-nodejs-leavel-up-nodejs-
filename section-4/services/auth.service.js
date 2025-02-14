@@ -24,7 +24,7 @@ const refreshAuthToken = async (refreshToken) => {
       throw new Error();
     }
     console.log("userrrrr",user)
-    await refreshTokenDoc.remove();
+    await refreshTokenDoc.deleteOne();
     return tokenService.generateAuthTokens(user.id);
   } catch (error) {
     console.log('the main error',error)

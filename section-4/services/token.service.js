@@ -29,21 +29,18 @@ return tokenDoc;
 const verifyToken = async (token, type) => {
     const payload = jwt.verify(token, config.jwt.secret);
     const tokenDoc = await Token.findOne({
-      token,
-      user: payload.sub,
-      type,
-      blacklisted: false,
+    token,
+    user: payload.sub,
+    type,
+    blacklisted: false,
     });
 console.log('tokenDoc',tokenDoc)
 console.log("verify token", token)
 console.log("payload sub", payload.sub)
 console.log("type", type)
 console.log('blaclisted',false)
-return tokenDoc;
 
-if (!tokenDoc) {
-    throw new Error('Token not found');
-}
+return tokenDoc;
 };
 
 
