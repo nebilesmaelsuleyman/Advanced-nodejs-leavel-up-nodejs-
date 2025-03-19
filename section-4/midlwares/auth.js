@@ -1,20 +1,23 @@
-const passport = require('passport')
-const ApiError =require('./../utils/ApiError')
 
-const verifyCallBack= (req,resolve,reject)=>async (err,user,info)=>{
-if(err || info || !user){
-    throw new ApiError(401,'please authenticate')
-}
+    const passport = require('passport');
+    const ApiError = require('./../utils/ApiError');
 
-req.user =user;
-resolve();
 
-}
-const auth= async(req,res,next)=>{
-    return new promise((resolve,reject)=>{
-        passport.authenticate('jwt',{session:false},verifyCallBack(req,resolve,reject))
-        (req,res,next);
-    }).then(()=>next())
-    .catch((error)=>next(error));
-}
-module.exports =auth
+    const auth = async (req, res, next) => {
+    try {
+        await new Promise((resolve, reject) => {
+        passport.authenticate('jwt', { session: false }, (err, user, info) => {
+            if (err || info || !user) {
+            return reject(new ApiError(401, 'Please authenticate')); // Directly reject with the error
+            }
+            req.user = user;
+            resolve();
+        })(req, res, next); // Call the passport authenticate function
+        });
+        next(); // Call next if authentication is successful
+    } catch (error) {
+        next(error); // Pass any errors to the error handling middleware
+    }
+    };
+
+    module.exports = auth;

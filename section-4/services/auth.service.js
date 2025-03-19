@@ -12,6 +12,7 @@ const login = async (email, password) => {
   return user;
 };
 
+
 const refreshAuthToken = async (refreshToken) => {
   try {
     const refreshTokenDoc = await tokenService.verifyToken(

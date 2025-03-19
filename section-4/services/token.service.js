@@ -26,6 +26,7 @@ const tokenDoc = await Token.create({
 return tokenDoc;
 };
 
+
 const verifyToken = async (token, type) => {
     const payload = jwt.verify(token, config.jwt.secret);
     const tokenDoc = await Token.findOne({
@@ -34,6 +35,7 @@ const verifyToken = async (token, type) => {
     type,
     blacklisted: false,
     });
+
 console.log('tokenDoc',tokenDoc)
 console.log("verify token", token)
 console.log("payload sub", payload.sub)
