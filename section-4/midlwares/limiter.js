@@ -34,7 +34,7 @@ const authLimiter = async (req, res, next) => {
 		retrySeconds = Math.floor(slowerBruteRes.msBeforeNext / 1000) || 1
 	} else if (
 		emailIpRes &&
-		emailIpRes.consumedPoints >= maxAttemptsByIpUsername
+		emailIpRes.consumedPoints >= maxAttemptsMyIpUsername
 	) {
 		retrySeconds = Math.floor(emailIpRes.msBeforeNext / 1000) || 1
 	}
@@ -44,4 +44,12 @@ const authLimiter = async (req, res, next) => {
 		return next(new ApiError(429, 'Too many requests'))
 	}
 	next()
+}
+
+module.exports = {
+	emailIpBruteLimiter,
+
+	slowerBruteLimiter,
+
+	authLimiter,
 }
