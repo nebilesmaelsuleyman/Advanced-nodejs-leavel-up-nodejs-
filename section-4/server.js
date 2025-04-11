@@ -9,6 +9,9 @@ const passport = require('passport')
 const { jwtStrategy } = require('./config/passport')
 const { xss } = require('express-xss-sanitizer')
 const helmet = require('helmet')
+const mongoSanitize = require('express-mongo-sanitize')
+const { cspOptions } = require('./config/config')
+const cors = requier('cors')
 
 // jwt authentication
 app.use(passport.initialize())
@@ -18,24 +21,25 @@ app.use(express.json())
 
 //security
 app.use(xss())
-app.use(
-	helmet.contentSecurityPolicy({
-		directives: {
-			default: ["'self'"],
-			styleSrc: ["'selft'"],
-			scriptSrc: ["'self'", "'unsafe-inline'"],
-			fontSrc: ["'self'", "'fonts.gstatic.com'"],
-		},
-		reportOnly: true,
-	})
-)
+
+app.use(helmet.contentSecurityPolicy(cspOptions))
+
+// app.use(mongoSanitize({ allowDots: true, replaceWith: '_' }))
 app.use(helmet.frameguard({ action: 'sameorigin' }))
 app.use(helmet.noSniff())
+if (env == 'production') {
+	app.use(cors({ origin: 'url' }))
+	app.options('*', cors({ origin: 'url' }))
+} else {
+	app.use(cors())
+	app.options('*', cors())
+}
+
 app.use(AllRouter)
 
 // path not found 404
 app.use((req, res, next) => {
-	next(new ApiError(httpStatus.NOT_FOUND, 'Not found'))
+	next()
 })
 
 app.use(errorHandler)

@@ -5,6 +5,7 @@ const { tokenTypes } = require('../config/tokens')
 const tokenService = require('./token.service')
 const { RateLimiterMongo } = require('rate-limiter-flexible')
 const mongoose = require('mongoose')
+const config = require('./../config/config')
 
 const login = async (email, password, ipAddr) => {
 	const rateLimiterOptioins = {

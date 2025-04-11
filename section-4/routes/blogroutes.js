@@ -15,7 +15,7 @@ router.post(
 	validate(uservalidation.createUserSchema),
 	authController.register
 )
-router.get(
+router.post(
 	'/auth/login',
 	authLimiter,
 	validate(authValidation.loginSchema),
@@ -26,9 +26,12 @@ router.post(
 	validate(authValidation.refreshTokenSchema),
 	authController.refreshToken
 )
-
-router.get('/', blogController.helllow)
-router.get('/blogs', blogController.getBlogs)
+router.get(
+	'/blogs',
+	auth,
+	validate(blogvalidation.getBlogSchema),
+	blogController.getBlogs
+)
 router.post('/blog', validate(blogvalidation), blogController.createBlog)
 
 module.exports = router
