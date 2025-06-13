@@ -1,14 +1,14 @@
-const { Blog } = require('./../model')
+const { Blog } = require('./../model');
 const createBlog = async (body, userId) => {
-	await Blog.create({ ...body, createdBy: userId })
-}
+  await Blog.create({ ...body, createdBy: userId });
+};
 
 const getBlogs = async (userId) => {
-	const blogs = await Blog.find({ createdBy: userId })
-	return blogs
-}
+  const blogs = await Blog.find({ createdBy: userId });
+  return blogs;
+};
 
 module.exports = {
-	createBlog,
-	getBlogs,
-}
+  createBlog,
+  getBlogs,
+};

@@ -1,22 +1,22 @@
-const User = require('./usermodel')
-const mongoose = require('mongoose')
+const User = require('./usermodel');
+const mongoose = require('mongoose');
 
 const blogSchema = mongoose.Schema({
-	title: {
-		type: String,
-		required: true,
-	},
-	description: {
-		type: String,
-		required: true,
-	},
-	createdBy: {
-		type: String,
-		ref: 'User',
-		required: true,
-	},
-})
+  title: {
+    type: String,
+    required: true,
+  },
+  description: {
+    type: String,
+    required: true,
+  },
+  createdBy: {
+    type: String,
+    ref: 'User',
+    required: true,
+  },
+});
 
-const Blog = mongoose.model('Blog', blogSchema)
+const Blog = mongoose.model('Blog', blogSchema);
 
-module.exports = Blog
+module.exports = Blog;

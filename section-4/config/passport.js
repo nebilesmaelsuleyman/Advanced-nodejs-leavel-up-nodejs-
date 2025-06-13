@@ -8,18 +8,18 @@ const jwtOptions = {
 };
 
 const jwtVerify = async (payload, done) => {
-try {
+  try {
     if (payload.type != tokenTypes.ACCESS) {
-    throw new Error('Invalid token type');
+      throw new Error('Invalid token type');
     }
     const user = userService.getUserById(payload.sub);
     if (!user) {
-    return done(null, false);
+      return done(null, false);
     }
     done(null, user);
-} catch (error) {
+  } catch (error) {
     done(error, false);
-}
+  }
 };
 
 const jwtStrategy = new JwtStrategy(jwtOptions, jwtVerify);

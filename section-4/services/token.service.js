@@ -5,88 +5,86 @@ const { tokenTypes } = require('./../config/tokens');
 const { Token } = require('./../model');
 
 const generateToken = (userId, expires, type, secret = config.jwt.secret) => {
-const payload = {
+  const payload = {
     sub: userId,
     iat: dayjs().unix(),
     exp: expires.unix(),
     type,
-};
+  };
 
-return jwt.sign(payload, secret);
+  return jwt.sign(payload, secret);
 };
 
 const saveToken = async (token, userId, expires, type, blacklisted = false) => {
-const tokenDoc = await Token.create({
+  const tokenDoc = await Token.create({
     token,
     user: userId,
     expires: expires.toDate(),
     type,
     blacklisted,
-});
-return tokenDoc;
+  });
+  return tokenDoc;
 };
 
-
 const verifyToken = async (token, type) => {
-    const payload = jwt.verify(token, config.jwt.secret);
-    const tokenDoc = await Token.findOne({
+  const payload = jwt.verify(token, config.jwt.secret);
+  const tokenDoc = await Token.findOne({
     token,
     user: payload.sub,
     type,
     blacklisted: false,
-    });
+  });
 
-console.log('tokenDoc',tokenDoc)
-console.log("verify token", token)
-console.log("payload sub", payload.sub)
-console.log("type", type)
-console.log('blaclisted',false)
+  console.log('tokenDoc', tokenDoc);
+  console.log('verify token', token);
+  console.log('payload sub', payload.sub);
+  console.log('type', type);
+  console.log('blaclisted', false);
 
-return tokenDoc;
+  return tokenDoc;
 };
 
-
 const generateAuthTokens = async (userId) => {
-const accessTokenExpires = dayjs().add(
+  const accessTokenExpires = dayjs().add(
     config.jwt.accessExpirationMinutes,
-    'minutes'
-);
-const accessToken = generateToken(
+    'minutes',
+  );
+  const accessToken = generateToken(
     userId,
     accessTokenExpires,
-    tokenTypes.ACCESS
-);
+    tokenTypes.ACCESS,
+  );
 
-const refreshTokenExpires = dayjs().add(
+  const refreshTokenExpires = dayjs().add(
     config.jwt.refreshExpirationDays,
-    'days'
+    'days',
   );
   const refreshToken = generateToken(
     userId,
     refreshTokenExpires,
-    tokenTypes.REFRESH
+    tokenTypes.REFRESH,
   );
   await saveToken(
     refreshToken,
     userId,
     refreshTokenExpires,
-    tokenTypes.REFRESH
-);
-    return {
+    tokenTypes.REFRESH,
+  );
+  return {
     access: {
-        token: accessToken,
-        expires: accessTokenExpires.toDate(),
+      token: accessToken,
+      expires: accessTokenExpires.toDate(),
     },
     refresh: {
-        token: refreshToken,
-        expires: refreshTokenExpires.toDate(),
+      token: refreshToken,
+      expires: refreshTokenExpires.toDate(),
     },
-};
+  };
 };
 
 module.exports = {
-generateToken,
-generateAuthTokens,
-verifyToken,
-saveToken,
+  generateToken,
+  generateAuthTokens,
+  verifyToken,
+  saveToken,
 };
