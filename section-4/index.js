@@ -1,24 +1,11 @@
-const mongoose = require('mongoose');
+const  loader =require('./loaders')
 const config = require('./config/config');
-const app = require('./server');
 const http = require('http');
 const logger = require('./config/logger');
+const express =require('express')
 
-mongoose
-  .connect(config.dbConnection)
-  .then(() => {
-    logger.info('connected to mongodb');
-  })
-  .catch((err) => {
-    logger.error(err);
-  });
 
-const httpServer = http.createServer(app);
-const server = httpServer.listen(config.port, () => {
-  logger.info(`server listening on port ${config.port}`);
-});
-
-const exitHandler = () => {
+const exitHandler = (server) => {
   if (server) {
     server.close(() => {
       logger.info('server closed');
@@ -28,13 +15,21 @@ const exitHandler = () => {
     process.exit(1);
   }
 };
-const unExcpectedErrorHandler = (error) => {
-  logger.error(error);
-  exitHandler();
+const unExcpectedErrorHandler = (server) => {
+ return function (error){
+ logger.error(error);
+  exitHandler(server);}
 };
 
-const unNamevar = 9;
 
+const startServer = async ()=>{
+const app = express();
+ await loader(app)
+
+const httpServer = http.createServer(app);
+const server = httpServer.listen(config.port, () => {
+  logger.info(`server listening on port ${config.port}`);
+});
 process.on('uncaughtException', unExcpectedErrorHandler);
 process.on('unhandleRejection', unExcpectedErrorHandler);
 
@@ -45,3 +40,14 @@ process.on('SIGTERM', () => {
     server.close();
   }
 });
+
+
+}
+startServer();
+
+
+
+
+
+
+
