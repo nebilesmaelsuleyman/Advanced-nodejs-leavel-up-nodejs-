@@ -35,11 +35,11 @@ const verifyToken = async (token, type) => {
     blacklisted: false,
   });
 
-  console.log('tokenDoc', tokenDoc);
-  console.log('verify token', token);
-  console.log('payload sub', payload.sub);
-  console.log('type', type);
-  console.log('blaclisted', false);
+  //   console.log('tokenDoc', tokenDoc);
+  //   console.log('verify token', token);
+  //   console.log('payload sub', payload.sub);
+  //   console.log('type', type);
+  //   console.log('blaclisted', false);
 
   return tokenDoc;
 };

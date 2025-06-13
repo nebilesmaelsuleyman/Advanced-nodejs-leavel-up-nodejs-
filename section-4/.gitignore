@@ -1,0 +1,23 @@
+# dependencies
+node_modules/
+.pnpm/
+.pnpm-debug.log
+
+# build
+dist/
+build/
+
+# local env files
+.env
+.env.*.local
+
+# system files
+.DS_Store
+Thumbs.db
+
+# lock file
+pnpm-lock.yaml
+
+# IDEs
+.vscode/
+.idea/

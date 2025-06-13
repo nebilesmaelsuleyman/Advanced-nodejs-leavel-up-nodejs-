@@ -33,6 +33,8 @@ const unExcpectedErrorHandler = (error) => {
   exitHandler();
 };
 
+const unNamevar = 9;
+
 process.on('uncaughtException', unExcpectedErrorHandler);
 process.on('unhandleRejection', unExcpectedErrorHandler);
 
