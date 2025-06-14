@@ -3,3 +3,4 @@ const eventEmmiter = new EventEmitter()
 
 
 eventEmmiter.on('eventName',(data)=>{})
+module.exports = eventEmmiter;

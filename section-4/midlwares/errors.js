@@ -16,18 +16,22 @@ const errorConverter = (err, req, res, next) => {
 };
 
 const errorHandler = (err, req, res, next) => {
-  const { statusCode, message } = err;
+  const statusCode = err.statusCode || 500;
+  const message = err.message || 'Internal Server Error';
+
   const response = {
     error: true,
     code: statusCode,
     message,
-    ...(config.env == 'development' && { stack: err.stack }),
+    ...(config.env === 'development' && { stack: err.stack }),
   };
 
   res.locals.errorMessage = message;
+
   if (config.env === 'development') {
     logger.error(err);
   }
+
   res.status(statusCode).json(response);
 };
 

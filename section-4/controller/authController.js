@@ -6,7 +6,7 @@ const { authService } = require('./../services');
 
 const register = catchAsync(async (req, res, next) => {
   const user = await userservice.createUser(req.body);
-  const token = tokenService.generateAuthToken(user._id);
+  const token = await tokenService.generateAuthTokens(user._id);
   res.status(201).json({
     user,
     token,
