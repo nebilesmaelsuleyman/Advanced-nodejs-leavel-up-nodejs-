@@ -1,12 +1,21 @@
 const catchAsync = require('./../utils/catchAsync');
 const httpStatus = require('http-status');
-const { userservice, tokenService } = require('./../services');
+const { userservice} = require('./../services');
 const ApiError = require('../utils/ApiError');
 const { authService } = require('./../services');
+const TokenService= require('token-service')
+const Token = require('../model/tokenmodel')
+const {tokenTypes}= require('../config/tokens')
+const config = require('../config/config')
+
+
+
+
+const tokensService = new TokenService( Token, tokenTypes,config)
 
 const register = catchAsync(async (req, res, next) => {
   const user = await userservice.createUser(req.body);
-  const token = await tokenService.generateAuthTokens(user._id);
+  const token = await tokensService.generateAuthToken(user._id);
   res.status(201).json({
     user,
     token,
@@ -21,7 +30,7 @@ const login = catchAsync(async (req, res) => {
     req.connection.remoteAddress,
   );
   // generate token
-  const tokens = await tokenService.generateAuthTokens(user.id);
+  const tokens = await tokensService.generateAuthTokens(user.id);
   res.status(200).send({ user, tokens });
 });
 
