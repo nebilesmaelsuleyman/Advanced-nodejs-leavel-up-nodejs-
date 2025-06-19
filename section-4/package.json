@@ -43,6 +43,7 @@
     "passport": "^0.7.0",
     "passport-jwt": "^4.0.1",
     "rate-limiter-flexible": "^6.1.0",
+    "sharp": "^0.34.2",
     "token-service": "file:../Token-service",
     "validation": "^0.0.1",
     "validator": "^13.12.0",
