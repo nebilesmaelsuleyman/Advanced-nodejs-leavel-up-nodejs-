@@ -30,7 +30,7 @@ const login = catchAsync(async (req, res) => {
     req.connection.remoteAddress,
   );
   // generate token
-  const tokens = await tokensService.generateAuthTokens(user.id);
+  const tokens = await tokensService.generateAuthToken(user.id);
   res.status(200).send({ user, tokens });
 });
 

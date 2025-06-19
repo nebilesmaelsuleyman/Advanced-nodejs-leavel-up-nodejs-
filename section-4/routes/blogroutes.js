@@ -9,6 +9,9 @@ const auth = require('./../midlwares/auth');
 const { uservalidation, authValidation } = require('./../validation');
 const { authController } = require('./../controller');
 const { authLimiter } = require('../midlwares/limiter');
+const upload = require('../utils/multer')
+
+
 
 router.post(
   '/auth/register',
@@ -33,5 +36,5 @@ router.get(
   blogController.getBlogs,
 );
 router.post('/blog', validate(blogvalidation), blogController.createBlog);
-
+router.post('/cover-image', upload.single('coverImage'), blogController.uploadFile)
 module.exports = router;

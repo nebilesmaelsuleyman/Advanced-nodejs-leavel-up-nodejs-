@@ -11,7 +11,19 @@ const getBlogs = catchAsync(async (req, res) => {
   res.status(200).json(blogs);
 });
 
+const uploadFile = catchAsync(async (req, res)=>{
+
+
+const filePath = await blogservice.uploadFile(req.body)
+if(!req.file){
+throw new ApiError(404,'file not found')}
+
+res.status(200).json({filePath:`/uplaods${req.file.filename}`});
+
+})
+
 module.exports = {
   createBlog,
   getBlogs,
+  uploadFile
 };
