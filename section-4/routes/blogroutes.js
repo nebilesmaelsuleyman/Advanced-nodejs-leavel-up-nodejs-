@@ -37,4 +37,5 @@ router.get(
 );
 router.post('/blog', validate(blogvalidation), blogController.createBlog);
 router.post('/cover-image', upload.single('coverImage'), blogController.uploadFile)
+router.get('/blog/image/:filename',blogController.getFile)
 module.exports = router;

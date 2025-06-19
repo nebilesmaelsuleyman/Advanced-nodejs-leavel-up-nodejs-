@@ -21,3 +21,5 @@ pnpm-lock.yaml
 # IDEs
 .vscode/
 .idea/
+
+uploads

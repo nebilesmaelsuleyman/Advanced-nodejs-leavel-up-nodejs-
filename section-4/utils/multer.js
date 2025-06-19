@@ -14,9 +14,13 @@ cb(null,filename)}
 })
 module.exports = multer({storage,fileFilter(req,file,cb){
 
+const maxFileSize =3* 1024*1024
+
 if(!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)){
 return cb(new ApiError(400,' only images are allowed'),false)
 
+}else if(file.size> maxFileSize){
+new ApiError(400, 'file must be less than 3mb')
 }
 cb(null, true)
 }})
