@@ -14,14 +14,14 @@ const getBlogs = async (userId) => {
   return blogs;
 }
 
-const uploadFile = async (file) => {
-  const filename = `image-${Date.now()}.webp`;
-  const outputPath = `${__dirname}/../uploads/${filename}`;
-  await sharp(file.buffer).resize(600).webp({ quality: 80 }).toFile(outputPath);
+// implemented by worker , in background
+// const uploadFile = async (file) => {
+//   const filename = `image-${Date.now()}.webp`;
+//   const outputPath = `${__dirname}/../uploads/${filename}`;
+//   await sharp(file.buffer).resize(600).webp({ quality: 80 }).toFile(outputPath);
+//   return filename;
+// };
 
-  
-  return filename;
-};
 
 const getReadableFileStream= async (filename) => {
  const filepath= path.join(__dirname, '..','uploads',filename)
@@ -30,6 +30,7 @@ const getReadableFileStream= async (filename) => {
  if(!fs.existsSync(filepath)){
    throw new ApiError(404,'File not found')
  }
+ 
  const stream = fs.createReadStream(filepath);
  return stream
 }
@@ -37,6 +38,6 @@ const getReadableFileStream= async (filename) => {
 module.exports = {
   createBlog,
   getBlogs,
-  uploadFile,
+//   uploadFile,
   getReadableFileStream
 };

@@ -29,4 +29,7 @@ module.exports = {
       fontSrc: ["'self'", 'fonts.gstatic.com'],
     },
   },
+  redis:{
+  host:envVars.REDIS_HOST,
+  port:envVars.REDIS_PORT}
 };
